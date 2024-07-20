@@ -1,2 +1,0 @@
-# kazu107lab
-lab
