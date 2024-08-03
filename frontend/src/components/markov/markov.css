@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+}
+
+.graph {
+  flex: 3;
+  border: 1px solid #ccc;
+}
+
+.sidebar {
+  flex: 1;
+  padding: 20px;
+  border-left: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+.sidebar h3 {
+  margin-top: 0;
+}
+
+.sidebar button {
+  display: block;
+  margin-bottom: 10px;
+}
