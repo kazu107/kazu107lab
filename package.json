@@ -1,0 +1,13 @@
+{
+  "name": "my-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node backend/server.js",
+    "heroku-postbuild": "cd frontend && npm install && npm run build && cd .. && cd backend && npm install"
+  },
+  "engines": {
+    "node": "20.x"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
