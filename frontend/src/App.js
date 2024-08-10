@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Markov from './components/markov/markov';
 import Test from './components/test/test';
 import Microwave from './components/microwave/microwave';
+import Roulette from './components/roulette/roulette';
 import './App.css';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
                     <Route path="/markov" element={<Markov />} />
                     <Route path="/test" element={<Test />} />
                     <Route path="/microwave" element={<Microwave />} />
+                    <Route path="/roulette" element={<Roulette />} />
                     {/* 他のルートを追加 */}
                 </Routes>
             </div>
