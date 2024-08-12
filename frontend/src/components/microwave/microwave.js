@@ -121,7 +121,7 @@ const MyComponent = ({canAdd, initialValue}) => {
     // comparison values
     const comparison = compare.map((item, index) => {
         return (
-            <Draggable key={index+1} cancel=".row, .closeButton">
+            <Draggable key={index+1} cancel=".row, .closeButton, .AddButton">
                 <div>
                     <div className="sub-container">
                         <div className="header">
@@ -181,7 +181,7 @@ const MyComponent = ({canAdd, initialValue}) => {
 
     return (
         <>
-            <Draggable cancel=".row, .closeButton">
+            <Draggable cancel=".row, .closeButton, .AddButton">
                 <div className="container">
                     <div className="header">
                         <span>Base</span>
