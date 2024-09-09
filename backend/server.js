@@ -77,11 +77,11 @@ app.post('/api/login', async (req, res) => {
         }
 
         // パスワードの検証
-        if (!user.password) {
+        if (!user.password_hash) {
             return res.status(500).json({ error: 'Password hash not found for the user' });
         }
 
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(password, user.password_hash);
 
         if (!isMatch) {
             return res.status(400).json({ error: 'Invalid credentials' });
