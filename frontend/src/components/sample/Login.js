@@ -17,13 +17,17 @@ const Login = ({ setIsLoggedIn }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // デバッグ: 入力されたフォームデータをコンソールに出力
+        console.log('Form data:', formData);
+
         try {
             const response = await axios.post('/api/login', formData);
             localStorage.setItem('token', response.data.token);
-            setIsLoggedIn(true);  // ログイン状態をtrueに
+            setIsLoggedIn(true);  // ログイン状態を true に設定
             alert('Login successful!');
-            navigate('/dashboard');  // ダッシュボードへリダイレクト
+            navigate('/dashboard');  // ログイン後にダッシュボードにリダイレクト
         } catch (err) {
+            console.error('Error during login request:', err.response || err);
             setError(err.response?.data?.error || 'Invalid email or password');
         }
     };

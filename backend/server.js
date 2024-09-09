@@ -71,7 +71,9 @@ app.post('/api/login', async (req, res) => {
         const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
         const user = result.rows[0];
 
-        // ユーザーが存在しない場合のエラーハンドリング
+        // デバッグ: データベースから取得したユーザーデータを出力
+        console.log('User data from database:', user);
+
         if (!user) {
             return res.status(400).json({ error: 'Invalid credentials' });
         }
@@ -81,7 +83,9 @@ app.post('/api/login', async (req, res) => {
             return res.status(500).json({ error: 'Password hash not found for the user' });
         }
 
+        // デバッグ: ハッシュされたパスワードと入力されたパスワードを比較
         const isMatch = await bcrypt.compare(password, user.password_hash);
+        console.log('Password match:', isMatch);
 
         if (!isMatch) {
             return res.status(400).json({ error: 'Invalid credentials' });
@@ -96,6 +100,7 @@ app.post('/api/login', async (req, res) => {
         res.status(500).json({ error: 'An error occurred during login' });
     }
 });
+
 
 
 // フロントエンドのビルド済みファイルを提供する
