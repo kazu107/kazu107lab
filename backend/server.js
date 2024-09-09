@@ -61,6 +61,7 @@ app.post('/api/signup', async (req, res) => {
 app.post('/api/login', async (req, res) => {
     const { email, password } = req.body;
 
+    // Emailとパスワードの入力チェック
     if (!email || !password) {
         return res.status(400).json({ error: 'Email and password are required' });
     }
@@ -70,12 +71,18 @@ app.post('/api/login', async (req, res) => {
         const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
         const user = result.rows[0];
 
+        // ユーザーが存在しない場合のエラーハンドリング
         if (!user) {
             return res.status(400).json({ error: 'Invalid credentials' });
         }
 
         // パスワードの検証
+        if (!user.password) {
+            return res.status(500).json({ error: 'Password hash not found for the user' });
+        }
+
         const isMatch = await bcrypt.compare(password, user.password);
+
         if (!isMatch) {
             return res.status(400).json({ error: 'Invalid credentials' });
         }
@@ -85,10 +92,11 @@ app.post('/api/login', async (req, res) => {
 
         res.status(200).json({ token, user: { id: user.id, username: user.username, email: user.email } });
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Something went wrong' });
+        console.error('Error during login:', err);
+        res.status(500).json({ error: 'An error occurred during login' });
     }
 });
+
 
 // フロントエンドのビルド済みファイルを提供する
 app.use(express.static(path.join(__dirname, '../frontend/build')));
