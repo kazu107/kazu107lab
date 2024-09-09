@@ -1,0 +1,154 @@
+/* グローバルスタイル */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.app-unique123 {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.main-unique123 {
+    display: flex;
+    flex: 1;
+}
+
+.content-unique123 {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Navbar */
+.navbar-unique123 {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+}
+
+.navbar-unique123 ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navbar-unique123 ul li {
+    margin-left: 20px;
+}
+
+.navbar-unique123 ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.navbar-unique123 ul li a:hover {
+    background-color: #555;
+    border-radius: 4px;
+}
+
+/* Sidebar */
+.sidebar-unique123 {
+    background-color: #f4f4f4;
+    padding: 20px;
+    width: 200px;
+}
+
+.sidebar-unique123 ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-unique123 ul li {
+    margin: 10px 0;
+    position: relative;
+}
+
+.sidebar-unique123 ul li a {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    display: block;
+}
+
+.sidebar-unique123 ul li a:hover {
+    color: #007bff;
+}
+
+/* アクティブな項目 */
+.active-unique123 {
+    background-color: rgba(0, 123, 255, 0.1); /* 薄いハイライト */
+    border-left: 4px solid #007bff; /* 左側に青い線 */
+}
+
+.active-unique123 a {
+    color: #007bff;
+}
+
+/* Authentication Pages */
+.auth-container-unique123 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.auth-box-unique123 {
+    background-color: white;
+    padding: 40px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 300px;
+}
+
+.auth-form-unique123 label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.auth-form-unique123 input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.auth-form-unique123 button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.auth-form-unique123 button:hover {
+    background-color: #218838;
+}
+
+.auth-box-unique123 p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.logout-button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.logout-button:hover {
+    text-decoration: underline;
+}
