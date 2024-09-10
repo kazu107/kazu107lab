@@ -3,7 +3,7 @@ import './sample.css';
 
 const Navbar = ({ isLoggedIn, onLogout }) => (
     <nav className="navbar-unique123">
-        <h1>My Website</h1>
+        <h1>kazu107 Lab</h1>
         <ul>
             <li><a href="/">Home</a></li>
             {!isLoggedIn && <li><a href="/signup">Signup</a></li>}
@@ -13,33 +13,80 @@ const Navbar = ({ isLoggedIn, onLogout }) => (
     </nav>
 );
 
-const Sidebar = ({ selectedSection, onSelect }) => (
-    <div className="sidebar-unique123">
-        <ul>
-            <li className={selectedSection === 'Profile' ? 'active-unique123' : ''}>
-                <a href="#profile" onClick={() => onSelect('Profile')}>Profile</a>
-            </li>
-            <li className={selectedSection === 'Settings' ? 'active-unique123' : ''}>
-                <a href="#settings" onClick={() => onSelect('Settings')}>Settings</a>
-            </li>
-            <li className={selectedSection === 'Dashboard' ? 'active-unique123' : ''}>
-                <a href="#dashboard" onClick={() => onSelect('Dashboard')}>Dashboard</a>
-            </li>
-            <li className={selectedSection === 'Help' ? 'active-unique123' : ''}>
-                <a href="#help" onClick={() => onSelect('Help')}>Help</a>
-            </li>
-            <li className={selectedSection === 'Logout' ? 'active-unique123' : ''}>
-                <a href="#logout" onClick={() => onSelect('Logout')}>Logout</a>
-            </li>
-        </ul>
-    </div>
-);
+const Sidebar = ({ selectedSection, onSelect }) => {
+    const [isProfileOpen, setIsProfileOpen] = useState(true);
+    const [isSettingsOpen, setIsSettingsOpen] = useState(true);
+    const [isDashboardOpen, setIsDashboardOpen] = useState(true);
+
+    return (
+        <div className="sidebar-unique123">
+            <ul>
+                {/* Profile Section */}
+                <li>
+                    <button className="toggle-button" onClick={() => setIsProfileOpen(!isProfileOpen)}>
+                        {isProfileOpen ? '▼' : '▶'} Profile
+                    </button>
+                    {isProfileOpen && (
+                        <ul>
+                            <li className={selectedSection === 'Profile' ? 'active-unique123' : ''}>
+                                <a href="#profile" onClick={() => onSelect('Profile')}>Profile Overview</a>
+                            </li>
+                        </ul>
+                    )}
+                </li>
+
+                {/* Settings Section */}
+                <li>
+                    <button className="toggle-button" onClick={() => setIsSettingsOpen(!isSettingsOpen)}>
+                        {isSettingsOpen ? '▼' : '▶'} Settings
+                    </button>
+                    {isSettingsOpen && (
+                        <ul>
+                            <li className={selectedSection === 'Settings' ? 'active-unique123' : ''}>
+                                <a href="#settings" onClick={() => onSelect('Settings')}>General Settings</a>
+                            </li>
+                            <li className={selectedSection === 'Security' ? 'active-unique123' : ''}>
+                                <a href="#security" onClick={() => onSelect('Security')}>Security Settings</a>
+                            </li>
+                        </ul>
+                    )}
+                </li>
+
+                {/* Dashboard Section */}
+                <li>
+                    <button className="toggle-button" onClick={() => setIsDashboardOpen(!isDashboardOpen)}>
+                        {isDashboardOpen ? '▼' : '▶'} Dashboard
+                    </button>
+                    {isDashboardOpen && (
+                        <ul>
+                            <li className={selectedSection === 'Overview' ? 'active-unique123' : ''}>
+                                <a href="#overview" onClick={() => onSelect('Overview')}>Overview</a>
+                            </li>
+                            <li className={selectedSection === 'Reports' ? 'active-unique123' : ''}>
+                                <a href="#reports" onClick={() => onSelect('Reports')}>Reports</a>
+                            </li>
+                        </ul>
+                    )}
+                </li>
+
+                {/* Help Section */}
+                <li className={selectedSection === 'Help' ? 'active-unique123' : ''}>
+                    <a href="#help" onClick={() => onSelect('Help')}>Help</a>
+                </li>
+
+                {/* Logout */}
+                <li className={selectedSection === 'Logout' ? 'active-unique123' : ''}>
+                    <a href="#logout" onClick={() => onSelect('Logout')}>Logout</a>
+                </li>
+            </ul>
+        </div>
+    );
+};
 
 const ProfileContent = ({ isLoggedIn, user }) => {
     const [location, setLocation] = useState(null);
     const [browserInfo, setBrowserInfo] = useState({});
 
-    // Geolocation APIを使用して位置情報を取得
     useEffect(() => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -58,7 +105,6 @@ const ProfileContent = ({ isLoggedIn, user }) => {
             setLocation({ error: 'Geolocation is not supported by this browser' });
         }
 
-        // ブラウザ情報を取得
         const browserInfo = {
             appName: navigator.appName,
             appVersion: navigator.appVersion,
@@ -114,7 +160,6 @@ function App() {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        // ログイン状態を確認するために、localStorageに保存されたトークンを確認
         const token = localStorage.getItem('token');
         const storedUser = localStorage.getItem('user');
         if (token && storedUser) {
@@ -124,7 +169,6 @@ function App() {
     }, []);
 
     const handleLogout = () => {
-        // ログアウト処理: トークンを削除し、ログイン状態をfalseに設定
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         setIsLoggedIn(false);

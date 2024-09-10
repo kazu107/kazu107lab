@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Draggable from "react-draggable";
+import { Helmet } from 'react-helmet';
 import './microwave.css';
 
 function Microwave() {
     return (
         <>
+            <Helmet>
+                <title>Microwave Simulator</title>
+            </Helmet>
             <div className="main">
                 <div className={"compares"}>
                     <MyComponent canAdd={true} initialValue={{

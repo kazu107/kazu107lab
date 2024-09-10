@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import './roulette.css';
 
 const VerticalRoulette = () => {
@@ -87,6 +88,10 @@ const VerticalRoulette = () => {
     const repeatedItems = items.length >= 5 ? items : [...items, ...items, ...items];
 
     return (
+        <>
+        <Helmet>
+            <title>Vertical Roulette</title>
+        </Helmet>
         <div className="main">
             <div className="roulette-container">
                 <div className="roulette-wrapper">
@@ -137,6 +142,7 @@ const VerticalRoulette = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 };
 

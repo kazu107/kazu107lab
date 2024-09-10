@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import CytoscapeComponent from 'react-cytoscapejs';
+import { Helmet } from 'react-helmet';
 import './markov.css';
 
 const CytoscapeGraph = () => {
@@ -271,8 +272,13 @@ const CytoscapeGraph = () => {
   };
 
   return (
-      <div className="cyto-container">
-        <div className="cyto-graph-container">
+      <div>
+        <Helmet>
+          <title>Markov Chain</title>
+          <meta name="description" content="visualize Markov chain"/>
+        </Helmet>
+        <div className="cyto-container">
+          <div className="cyto-graph-container">
           <CytoscapeComponent
               elements={elements}
               stylesheet={[
@@ -427,6 +433,7 @@ const CytoscapeGraph = () => {
               </div>
             </div>
         )}
+      </div>
       </div>
   );
 };
