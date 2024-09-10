@@ -17,15 +17,14 @@ const Signup = ({ setIsLoggedIn }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        try {
-            const response = await axios.post('/api/signup', formData);
+        const response = await axios.post('/api/signup', formData);
+        if (response.data.error) {
+            setError(response.data.error);
+        }
+        else {
             localStorage.setItem('token', response.data.token);
-            setIsLoggedIn(true);  // ログイン状態をtrueに
-            alert('Signup successful!');
-            navigate('/dashboard');  // ダッシュボードへリダイレクト
-        } catch (err) {
-            setError(err.response?.data?.error || 'Something went wrong');
+            setIsLoggedIn(true);
+            navigate('/dashboard');
         }
     };
 

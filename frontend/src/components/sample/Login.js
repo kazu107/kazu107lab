@@ -16,17 +16,16 @@ const Login = ({ setIsLoggedIn }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        try {
-            const response = await axios.post('/api/login', formData);
-
+        const response = await axios.post('/api/login', formData);
+        if (response.data.error) {
+            setError(response.data.error);
+        }
+        else {
             localStorage.setItem('token', response.data.token);
             setIsLoggedIn(true);  // ログイン状態をtrueにする
             navigate('/dashboard');  // ログイン後にリダイレクト
-        } catch (err) {
-            console.error('Error during login request:', err);
-            setError(err.response?.data?.error || 'Invalid email or password');
         }
+
     };
 
     return (
