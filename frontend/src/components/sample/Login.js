@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';  // useNavigateを使用
+import { useNavigate } from 'react-router-dom';
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = ({ setIsLoggedIn, setUser }) => {
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
     const [error, setError] = useState('');
-    const navigate = useNavigate();  // useNavigateフックを呼び出す
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,9 +20,23 @@ const Login = ({ setIsLoggedIn }) => {
         try {
             const response = await axios.post('/api/login', formData);
 
+            // JWTトークンを localStorage に保存
             localStorage.setItem('token', response.data.token);
-            setIsLoggedIn = true;  // ログイン状態をtrueにする
-            navigate('/#profile');  // ログイン後にリダイレクト
+
+            // ユーザー情報を localStorage に保存
+            const userInfo = {
+                id: response.data.user.id,
+                username: response.data.user.username,
+                email: response.data.user.email
+            };
+            localStorage.setItem('user', JSON.stringify(userInfo));
+
+            // グローバルな状態にユーザー情報を設定
+            setUser(userInfo);
+            setIsLoggedIn = true;
+
+            // ログイン成功後にリダイレクト
+            navigate('/');
         } catch (err) {
             console.error('Error during login request:', err);
             setError(err.response?.data?.error || 'Invalid email or password');

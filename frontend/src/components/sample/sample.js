@@ -35,18 +35,66 @@ const Sidebar = ({ selectedSection, onSelect }) => (
     </div>
 );
 
-const ProfileContent = ({ isLoggedIn }) => {
-    if (isLoggedIn) {
+const ProfileContent = ({ isLoggedIn, user }) => {
+    const [location, setLocation] = useState(null);
+    const [browserInfo, setBrowserInfo] = useState({});
+
+    // Geolocation APIを使用して位置情報を取得
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    setLocation({
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    });
+                },
+                (error) => {
+                    console.error('Error getting location:', error);
+                    setLocation({ error: 'Unable to retrieve location' });
+                }
+            );
+        } else {
+            setLocation({ error: 'Geolocation is not supported by this browser' });
+        }
+
+        // ブラウザ情報を取得
+        const browserInfo = {
+            appName: navigator.appName,
+            appVersion: navigator.appVersion,
+            userAgent: navigator.userAgent,
+            platform: navigator.platform
+        };
+        setBrowserInfo(browserInfo);
+    }, []);
+
+    if (isLoggedIn && user) {
         return (
             <div>
                 <h2>Profile</h2>
-                <p>Welcome, User! You are logged in.</p>
-                <p>Here are your profile details:</p>
-                <ul>
-                    <li>Username: johndoe</li>
-                    <li>Email: johndoe@example.com</li>
-                    <li>Location: New York, USA</li>
-                </ul>
+                <p>Welcome, {user.username}!</p>
+                <p><strong>Username:</strong> {user.username}</p>
+                <p><strong>Email:</strong> {user.email}</p>
+
+                <h3>Location Information</h3>
+                {location ? (
+                    location.error ? (
+                        <p>{location.error}</p>
+                    ) : (
+                        <p>
+                            <strong>Latitude:</strong> {location.latitude} <br />
+                            <strong>Longitude:</strong> {location.longitude}
+                        </p>
+                    )
+                ) : (
+                    <p>Fetching location...</p>
+                )}
+
+                <h3>Browser Information</h3>
+                <p><strong>App Name:</strong> {browserInfo.appName}</p>
+                <p><strong>App Version:</strong> {browserInfo.appVersion}</p>
+                <p><strong>User Agent:</strong> {browserInfo.userAgent}</p>
+                <p><strong>Platform:</strong> {browserInfo.platform}</p>
             </div>
         );
     } else {
@@ -63,19 +111,24 @@ const ProfileContent = ({ isLoggedIn }) => {
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [selectedSection, setSelectedSection] = useState('Home');
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         // ログイン状態を確認するために、localStorageに保存されたトークンを確認
         const token = localStorage.getItem('token');
-        if (token) {
+        const storedUser = localStorage.getItem('user');
+        if (token && storedUser) {
             setIsLoggedIn(true);
+            setUser(JSON.parse(storedUser));  // localStorageからユーザー情報を取得
         }
     }, []);
 
     const handleLogout = () => {
         // ログアウト処理: トークンを削除し、ログイン状態をfalseに設定
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
         setIsLoggedIn(false);
+        setUser(null);
         alert('Logged out successfully!');
     };
 
@@ -83,10 +136,10 @@ function App() {
         <div className="app-unique123">
             <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
             <div className="main-unique123">
-                <Sidebar selectedSection={selectedSection} onSelect={setSelectedSection} />
+                <Sidebar selectedSection={selectedSection} user={user} onSelect={setSelectedSection} />
                 <div className="content-unique123">
                     {selectedSection === 'Profile' ? (
-                        <ProfileContent isLoggedIn={isLoggedIn} />
+                        <ProfileContent isLoggedIn={isLoggedIn} user={user} />
                     ) : (
                         <div>
                             <h2>{selectedSection}</h2>

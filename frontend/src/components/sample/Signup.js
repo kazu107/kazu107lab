@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Signup = ({ setIsLoggedIn }) => {
+const Signup = ({ setIsLoggedIn, setUser }) => {
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -21,9 +21,20 @@ const Signup = ({ setIsLoggedIn }) => {
         try {
             const response = await axios.post('/api/signup', formData);
             localStorage.setItem('token', response.data.token);
+            // ユーザー情報を localStorage に保存
+            const userInfo = {
+                id: response.data.user.id,
+                username: response.data.user.username,
+                email: response.data.user.email
+            };
+            localStorage.setItem('user', JSON.stringify(userInfo));
+
+            // グローバルな状態にユーザー情報を設定
+            setUser(userInfo);
+            setIsLoggedIn = true;
             setIsLoggedIn = true;  // ログイン状態をtrueに
             alert('Signup successful!');
-            navigate('/dashboard');  // ダッシュボードへリダイレクト
+            navigate('/');  // ダッシュボードへリダイレクト
         } catch (err) {
             setError(err.response?.data?.error || 'Something went wrong');
         }
