@@ -32,7 +32,7 @@ const Login = ({ setIsLoggedIn, setUser }) => {
             localStorage.setItem('user', JSON.stringify(userInfo));
 
             // グローバルな状態にユーザー情報を設定
-            setUser(userInfo);
+            setUser = userInfo;
             setIsLoggedIn = true;
 
             // ログイン成功後にリダイレクト

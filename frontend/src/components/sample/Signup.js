@@ -30,8 +30,7 @@ const Signup = ({ setIsLoggedIn, setUser }) => {
             localStorage.setItem('user', JSON.stringify(userInfo));
 
             // グローバルな状態にユーザー情報を設定
-            setUser(userInfo);
-            setIsLoggedIn = true;
+            setUser = userInfo;
             setIsLoggedIn = true;  // ログイン状態をtrueに
             alert('Signup successful!');
             navigate('/');  // ダッシュボードへリダイレクト
