@@ -92,7 +92,7 @@ app.post('/api/login', async (req, res) => {
         }
 
         // JWTトークンの生成
-        const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: '1y' });
 
         res.status(200).json({ token, user: { id: user.id, username: user.username, email: user.email } });
     } catch (err) {

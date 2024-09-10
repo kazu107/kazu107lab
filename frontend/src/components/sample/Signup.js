@@ -21,7 +21,7 @@ const Signup = ({ setIsLoggedIn }) => {
         try {
             const response = await axios.post('/api/signup', formData);
             localStorage.setItem('token', response.data.token);
-            setIsLoggedIn(true);  // ログイン状態をtrueに
+            setIsLoggedIn = true;  // ログイン状態をtrueに
             alert('Signup successful!');
             navigate('/dashboard');  // ダッシュボードへリダイレクト
         } catch (err) {

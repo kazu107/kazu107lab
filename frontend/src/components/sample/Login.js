@@ -21,8 +21,8 @@ const Login = ({ setIsLoggedIn }) => {
             const response = await axios.post('/api/login', formData);
 
             localStorage.setItem('token', response.data.token);
-            setIsLoggedIn(true);  // ログイン状態をtrueにする
-            navigate('/dashboard');  // ログイン後にリダイレクト
+            setIsLoggedIn = true;  // ログイン状態をtrueにする
+            navigate('/#profile');  // ログイン後にリダイレクト
         } catch (err) {
             console.error('Error during login request:', err);
             setError(err.response?.data?.error || 'Invalid email or password');
