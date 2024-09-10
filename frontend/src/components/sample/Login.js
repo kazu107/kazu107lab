@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';  // useNavigateを使用
 
 const Login = ({ setIsLoggedIn }) => {
     const [formData, setFormData] = useState({
@@ -8,7 +8,7 @@ const Login = ({ setIsLoggedIn }) => {
         password: ''
     });
     const [error, setError] = useState('');
-    const navigate = useNavigate();
+    const navigate = useNavigate();  // useNavigateフックを呼び出す
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,17 +17,14 @@ const Login = ({ setIsLoggedIn }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // デバッグ: 入力されたフォームデータをコンソールに出力
-        console.log('Form data:', formData);
-
         try {
             const response = await axios.post('/api/login', formData);
+
             localStorage.setItem('token', response.data.token);
-            setIsLoggedIn(true);  // ログイン状態を true に設定
-            alert('Login successful!');
-            navigate('/dashboard');  // ログイン後にダッシュボードにリダイレクト
+            setIsLoggedIn(true);  // ログイン状態をtrueにする
+            navigate('/dashboard');  // ログイン後にリダイレクト
         } catch (err) {
-            console.error('Error during login request:', err.response || err);
+            console.error('Error during login request:', err);
             setError(err.response?.data?.error || 'Invalid email or password');
         }
     };
