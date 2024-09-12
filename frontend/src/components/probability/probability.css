@@ -1,0 +1,31 @@
+.prob-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+    height: 100vh;
+    border-radius: 10px;
+  background-color: #eeeeee;
+}
+
+.prob-container {
+    display: flex;
+  margin: 5px;
+  border: 2px solid black;
+  padding: 10px;
+  width: auto;
+  border-radius: 10px;
+  position: relative;
+  cursor: move;
+  gap: 5px;
+}
+
+.prob-container span {
+  margin-right: 15px;
+}
+
+.smallInput {
+  width: 60px;
+  background-color: #eeeeee;
+}

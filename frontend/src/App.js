@@ -7,6 +7,7 @@ import Roulette from './components/roulette/roulette';
 import Sample from "./components/sample/sample";
 import Login from "./components/sample/Login";
 import Signup from "./components/sample/Signup";
+import Probability from "./components/probability/probability";
 import './App.css';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
                     <Route path="/" element={<Sample />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
+                    <Route path="/probability" element={<Probability />} />
                     {/* 他のルートを追加 */}
                 </Routes>
             </div>
