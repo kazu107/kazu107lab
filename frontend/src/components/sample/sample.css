@@ -111,6 +111,18 @@ body {
     outline: none; /* ボタン自体はハイライトしない */
 }
 
+/*　セクションのスタイル */
+.external-link-home {
+    margin-left: 10px;
+    color: #007bff; /* アイコンの色を設定 */
+    font-size: 0.9em;
+    text-decoration: none;
+}
+
+.external-link-home:hover {
+    color: #0056b3; /* ホバー時の色変更 */
+}
+
 
 /* アクティブな項目 */
 .active-unique123 {

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { FaExternalLinkAlt } from 'react-icons/fa';
 import './sample.css';
 
+// Navbar component
 const Navbar = ({ isLoggedIn, onLogout }) => (
     <nav className="navbar-unique123">
         <h1>kazu107 Lab</h1>
@@ -13,6 +15,7 @@ const Navbar = ({ isLoggedIn, onLogout }) => (
     </nav>
 );
 
+// Sidebar component
 const Sidebar = ({ selectedSection, onSelect }) => {
     const [isProfileOpen, setIsProfileOpen] = useState(true);
     const [isSettingsOpen, setIsSettingsOpen] = useState(true);
@@ -55,15 +58,21 @@ const Sidebar = ({ selectedSection, onSelect }) => {
                 {/* Dashboard Section */}
                 <li>
                     <button className="toggle-button" onClick={() => setIsDashboardOpen(!isDashboardOpen)}>
-                        {isDashboardOpen ? '▼' : '▶'} Dashboard
+                        {isDashboardOpen ? '▼' : '▶'} Lab
                     </button>
                     {isDashboardOpen && (
                         <ul>
-                            <li className={selectedSection === 'Overview' ? 'active-unique123' : ''}>
-                                <a href="#overview" onClick={() => onSelect('Overview')}>Overview</a>
+                            <li className={selectedSection === 'microwave' ? 'active-unique123' : ''}>
+                                <a href="#microwave" onClick={() => onSelect('microwave')}>microwave simulator</a>
                             </li>
-                            <li className={selectedSection === 'Reports' ? 'active-unique123' : ''}>
-                                <a href="#reports" onClick={() => onSelect('Reports')}>Reports</a>
+                            <li className={selectedSection === 'roulette' ? 'active-unique123' : ''}>
+                                <a href="#roulette" onClick={() => onSelect('roulette')}>accurate roulette</a>
+                            </li>
+                            <li className={selectedSection === 'markov' ? 'active-unique123' : ''}>
+                                <a href="#markov" onClick={() => onSelect('markov')}>markov chain</a>
+                            </li>
+                            <li className={selectedSection === 'gacha' ? 'active-unique123' : ''}>
+                                <a href="#gacha" onClick={() => onSelect('gacha')}>gacha simulator</a>
                             </li>
                         </ul>
                     )}
@@ -83,6 +92,7 @@ const Sidebar = ({ selectedSection, onSelect }) => {
     );
 };
 
+// ProfileContent component
 const ProfileContent = ({ isLoggedIn, user }) => {
     const [location, setLocation] = useState(null);
     const [browserInfo, setBrowserInfo] = useState({});
@@ -154,6 +164,86 @@ const ProfileContent = ({ isLoggedIn, user }) => {
     }
 };
 
+// MicrowaveContent component
+const MicrowaveContent = () => {
+    return (
+        <div>
+            <h2>
+                Microwave Simulator{' '}
+                <a
+                    href="/microwave"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="external-link-home"
+                >
+                    <FaExternalLinkAlt />
+                </a>
+            </h2>
+            <p>Coming soon...</p>
+        </div>
+    );
+};
+
+// RouletteContent component
+const RouletteContent = () => {
+    return (
+        <div>
+            <h2>
+                Accurate Roulette{' '}
+                <a
+                    href="/roulette"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="external-link-home"
+                >
+                    <FaExternalLinkAlt />
+                </a>
+            </h2>
+            <p>Coming soon...</p>
+        </div>
+    );
+};
+
+// MarkovContent component
+const MarkovContent = () => {
+    return (
+        <div>
+            <h2>
+                Markov Chain{' '}
+                <a
+                    href="/markov"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="external-link-home"
+                >
+                    <FaExternalLinkAlt />
+                </a>
+            </h2>
+            <p>Coming soon...</p>
+        </div>
+    );
+};
+
+// GachaContent component
+const GachaContent = () => {
+    return (
+        <div>
+            <h2>
+                Gacha Simulator{' '}
+                <a
+                    href="/probability"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="external-link-home"
+                >
+                    <FaExternalLinkAlt />
+                </a>
+            </h2>
+            <p>Coming soon...</p>
+        </div>
+    );
+};
+
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [selectedSection, setSelectedSection] = useState('Home');
@@ -182,14 +272,17 @@ function App() {
             <div className="main-unique123">
                 <Sidebar selectedSection={selectedSection} user={user} onSelect={setSelectedSection} />
                 <div className="content-unique123">
-                    {selectedSection === 'Profile' ? (
-                        <ProfileContent isLoggedIn={isLoggedIn} user={user} />
-                    ) : (
-                        <div>
-                            <h2>{selectedSection}</h2>
-                            <p>Welcome to the {selectedSection} section.</p>
-                        </div>
-                    )}
+                    <div className="content-unique123">
+                        {selectedSection === 'Profile' && <ProfileContent isLoggedIn={isLoggedIn} user={user} />}
+                        {selectedSection === 'Settings' && <h2>Settings</h2>}
+                        {selectedSection === 'Security' && <h2>Security Settings</h2>}
+                        {selectedSection === 'microwave' && <MicrowaveContent />}
+                        {selectedSection === 'roulette' && <RouletteContent />}
+                        {selectedSection === 'markov' && <MarkovContent />}
+                        {selectedSection === 'gacha' && <GachaContent />}
+                        {selectedSection === 'Help' && <h2>Help</h2>}
+                        {selectedSection === 'Logout' && <h2>Logout</h2>}
+                    </div>
                 </div>
             </div>
         </div>
