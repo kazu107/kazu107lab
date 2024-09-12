@@ -21,13 +21,14 @@ const MyLineChart = () => {
 
     React.useEffect(() => {
         let p = 1.0 - probability / 100.0;  // 確率の計算
+        let p2 = 1.0 - probability / 100.0;  // 確率の計算
         const newData = [];
         for (let i = 0; i < value; i++) {
-            newData.push({ x: i + 1, y: 1.0 - p });
+            newData.push({ x: i + 1, y: 1.0 - p2 });
             if (i === value - 1) {
-                setMaxprob(p * 100.0);
+                setMaxprob(p2 * 100.0);
             }
-            p *= 0.99;  // 確率の変化を計算
+            p2 *= p;  // 確率の変化を計算
         }
         setData2(newData);
     }, [probability, value]);  // probability と value が変更されるたびに再計算
@@ -37,6 +38,11 @@ const MyLineChart = () => {
         const percentage = (value * 100).toFixed(3); // 小数第3位にフォーマット
         const n = props.payload.x; // n回目の情報
         return [`${percentage}%`, `${n}回目`];
+    };
+
+    // Y軸のカスタムフォーマッタ (100倍して % 表記に変換)
+    const yAxisTickFormatter = (tick) => {
+        return `${(tick * 100).toFixed(3)}%`; // 100倍して整数にし、% をつけて返す
     };
 
     // label を非表示にする
@@ -87,7 +93,7 @@ const MyLineChart = () => {
                     >
                         <CartesianGrid strokeDasharray="3 3"/>
                         <XAxis dataKey="x" domain={['auto', 'auto']} type="number"/>
-                        <YAxis dataKey="y" domain={['auto', 'auto']} type="number"/>
+                        <YAxis dataKey="y" domain={['auto', 'auto']} type="number" tickFormatter={yAxisTickFormatter}/>
                         <Tooltip formatter={tooltipFormatter} labelFormatter={labelFormatter}/>
                         <Legend/>
                         <Line type="monotone" dataKey="y" stroke="#8884d8"/>
