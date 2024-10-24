@@ -1,77 +1,55 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { TextField, Container, Typography, Paper } from '@mui/material';
 import './test.css';
 
-function Square({ value, handleClick }) {
+function App() {
+    const [inputText, setInputText] = useState('');
+
+    const generateVerticalText = (text) => {
+        const lines = text.split('\n');
+        const maxLineLength = Math.max(...lines.map(line => line.length));
+
+        // 各行を右揃えにするために、短い行にスペースを追加
+        const paddedLines = lines.map(line => line.padStart(maxLineLength, ' '));
+
+        let verticalLines = [];
+        for (let i = 0; i < maxLineLength; i++) {
+            let verticalLine = '';
+            for (let j = paddedLines.length - 1; j >= 0; j--) {
+                verticalLine += paddedLines[j][i] + ' ';
+            }
+            verticalLines.push(verticalLine);
+        }
+
+        return verticalLines;
+    };
+
+    const verticalText = generateVerticalText(inputText);
+
     return (
-        <button className="square" onClick={handleClick}>
-            {value}
-        </button>
+        <Container maxWidth="md" style={{ marginTop: '50px' }}>
+            <Typography variant="h4" gutterBottom align="center">
+                縦書きテキスト変換ツール
+            </Typography>
+            <TextField
+                label="テキストを入力してください"
+                multiline
+                rows={4}
+                variant="outlined"
+                fullWidth
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+                style={{ marginBottom: '30px' }}
+            />
+            <Paper elevation={3} className="vertical-text-container">
+        <pre className="vertical-text">
+          {verticalText.map((line, index) => (
+              <div key={index}>{line}</div>
+          ))}
+        </pre>
+            </Paper>
+        </Container>
     );
 }
 
-function Test() {
-    const [value, setValue] = useState(Array(9).fill(null));
-    const [next, setNext] = useState(true);
-    function handleClick(i) {
-        if (value[i] || calculateWinner(value)) return;
-        const newValue = value.slice();
-        if (next) {
-            newValue[i] = 'X';
-        }
-        else {
-            newValue[i] = 'O';
-        }
-        setValue(newValue);
-        setNext(!next);
-    }
-    const winner = calculateWinner(value);
-    let status;
-    if (winner) {
-        status = 'Winner: ' + winner;
-    }
-    else {
-        status = 'Next player: ' + (next ? 'X' : 'O');
-    }
-    return (
-        <>
-            <div className="status">{status}</div>
-            <div className="board-row">
-                <Square value={value[0]} handleClick={() => handleClick(0)} />
-                <Square value={value[1]} handleClick={() => handleClick(1)} />
-                <Square value={value[2]} handleClick={() => handleClick(2)} />
-            </div>
-            <div className="board-row">
-                <Square value={value[3]} handleClick={() => handleClick(3)} />
-                <Square value={value[4]} handleClick={() => handleClick(4)} />
-                <Square value={value[5]} handleClick={() => handleClick(5)} />
-            </div>
-            <div className="board-row">
-                <Square value={value[6]} handleClick={() => handleClick(6)} />
-                <Square value={value[7]} handleClick={() => handleClick(7)} />
-                <Square value={value[8]} handleClick={() => handleClick(8)} />
-            </div>
-        </>
-    );
-}
-
-function calculateWinner(squares) {
-    const lines = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6]
-    ];
-    for (let i = 0; i < lines.length; i++) {
-        const [a, b, c] = lines[i];
-        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-            return squares[a];
-        }
-    }
-    return null;
-}
-
-export default Test;
+export default App;

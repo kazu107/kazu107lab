@@ -29,3 +29,46 @@
   width: 60px;
   background-color: #eeeeee;
 }
+
+.AddChartContainer {
+    display: flex;
+    justify-content: flex-start;
+    margin: 5px;
+    padding: 10px;
+    width: auto;
+    border-radius: 10px;
+    position: relative;
+    cursor: move;
+    gap: 5px;
+}
+
+.AddButton {
+  cursor: pointer;
+  color: green;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.DeleteButton {
+  cursor: pointer;
+  color: red;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.ChartConfigContainer {
+    display: flex;
+    justify-content: flex-start;
+    margin: 5px;
+    padding: 10px;
+    width: auto;
+    border-radius: 10px;
+    position: relative;
+    cursor: move;
+    gap: 5px;
+}
+
+.colorInput {
+    margin-left: 10px;
+    margin-right: 10px;
+}
