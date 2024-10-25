@@ -57,20 +57,27 @@ const MyLineChart = () => {
     React.useEffect(() => {
         const p = probability / 100.0;
         const newData = [];
+        let maxprob = 0;
+        let maxProbs = {};
+
         for (let n = 1; n <= value; n++) {
             const item = { x: n, y: 1 - Math.pow(1 - p, n) };
-            //console.log(item.y);
-            setMaxprob(item.y);
+            maxprob = item.y;
+
             chartData.forEach((data) => {
                 const m = data.value;
                 const key = `y${m}`;
                 item[key] = atLeast(n, m, p);
-                setChartMaxprob({ ...Chartmaxprob, [key]: item[key] });
+                maxProbs[key] = item[key];
             });
+
             newData.push(item);
         }
+
+        setMaxprob(maxprob);
+        setChartMaxprob(maxProbs);
         setData2(newData);
-    }, [probability, value, chartData]);// probability と value が変更されるたびに再計算
+    }, [probability, value, chartData]); // probability と value が変更されるたびに再計算
 
     // Tooltip のフォーマット
     const tooltipFormatter = (value, name, props) => {
@@ -207,24 +214,26 @@ const MyLineChart = () => {
                     </Tooltip>
                 </div>
                 <h3>Probability</h3>
-                <ResponsiveContainer width="50%" height={400}>
-                    <LineChart
-                        width={500}
-                        height={300}
-                        data={data2}
-                        margin={{
-                            top: 5, right: 30, left: 20, bottom: 5,
-                        }}
-                    >
-                        <CartesianGrid strokeDasharray="3 3"/>
-                        <XAxis dataKey="x" domain={['auto', 'auto']} type="number"/>
-                        <YAxis dataKey="y" domain={['auto', 'auto']} type="number" tickFormatter={yAxisTickFormatter}/>
-                        <Tooltip formatter={tooltipFormatter} labelFormatter={labelFormatter}/>
-                        <Legend/>
-                        <Line type="monotone" dataKey="y" stroke="#8884d8"/>
-                        {AddedLine}
-                    </LineChart>
-                </ResponsiveContainer>
+                <div className={"ChartArea"}>
+                    <ResponsiveContainer>
+                        <LineChart
+                            width={500}
+                            height={300}
+                            data={data2}
+                            margin={{
+                                top: 5, right: 30, left: 20, bottom: 5,
+                            }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3"/>
+                            <XAxis dataKey="x" domain={['auto', 'auto']} type="number"/>
+                            <YAxis dataKey="y" domain={['auto', 'auto']} type="number" tickFormatter={yAxisTickFormatter}/>
+                            <Tooltip formatter={tooltipFormatter} labelFormatter={labelFormatter}/>
+                            <Legend/>
+                            <Line type="monotone" dataKey="y" stroke="#8884d8"/>
+                            {AddedLine}
+                        </LineChart>
+                    </ResponsiveContainer>
+                </div>
                 <div className={"AddChartContainer"}>
                     <span className="AddButton" onClick={handleAdd}>＋</span>
                     <span>Add Chart</span>
