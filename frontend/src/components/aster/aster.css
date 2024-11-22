@@ -1,0 +1,62 @@
+* {
+    box-sizing: border-box;
+}
+
+.aster-container {
+    display: flex;
+    width: 100%;
+    height: 800px;
+    padding: 10px;
+}
+
+.aster-controls {
+    flex: 2;
+    margin-right: 10px;
+}
+
+.aster-controls label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.aster-cell-editor {
+    margin-top: 20px;
+}
+
+.aster-cell-editor h3 {
+    margin-bottom: 10px;
+}
+
+.aster-cell-editor label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.aster-grid-frame {
+    flex: 8;
+    border: 1px solid #ccc;
+    overflow: auto;
+}
+
+.aster-grid-container {
+    display: grid;
+    gap: 0;
+}
+
+.aster-grid-button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    border: 1px solid black;
+}
+
+.aster-grid-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.aster-grid-button.selected {
+    background-color: #d0ebff; /* 選択されたセルのハイライト色 */
+}
