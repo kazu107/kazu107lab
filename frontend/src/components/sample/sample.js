@@ -74,6 +74,9 @@ const Sidebar = ({ selectedSection, onSelect }) => {
                             <li className={selectedSection === 'gacha' ? 'active-unique123' : ''}>
                                 <a href="#gacha" onClick={() => onSelect('gacha')}>gacha simulator</a>
                             </li>
+                            <li className={selectedSection === 'aster' ? 'active-unique123' : ''}>
+                                <a href="#aster" onClick={() => onSelect('aster')}>aster visualizer</a>
+                            </li>
                         </ul>
                     )}
                 </li>
@@ -244,6 +247,26 @@ const GachaContent = () => {
     );
 };
 
+// AsterContent component
+const AsterContent = () => {
+    return (
+        <div>
+            <h2>
+                Aster Visualizer{' '}
+                <a
+                    href="/aster"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="external-link-home"
+                >
+                    <FaExternalLinkAlt />
+                </a>
+            </h2>
+            <p>Coming soon...</p>
+        </div>
+    );
+}
+
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [selectedSection, setSelectedSection] = useState('Home');
@@ -280,6 +303,7 @@ function App() {
                         {selectedSection === 'roulette' && <RouletteContent />}
                         {selectedSection === 'markov' && <MarkovContent />}
                         {selectedSection === 'gacha' && <GachaContent />}
+                        {selectedSection === 'aster' && <AsterContent />}
                         {selectedSection === 'Help' && <h2>Help</h2>}
                         {selectedSection === 'Logout' && <h2>Logout</h2>}
                     </div>

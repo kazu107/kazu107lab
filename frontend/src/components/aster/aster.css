@@ -41,11 +41,10 @@
 .aster-grid-container {
     display: grid;
     gap: 0;
+    width: fit-content;
 }
 
 .aster-grid-button {
-    width: 40px;
-    height: 40px;
     padding: 0;
     margin: 0;
     border: 1px solid black;
@@ -58,5 +57,5 @@
 }
 
 .aster-grid-button.selected {
-    background-color: #d0ebff; /* 選択されたセルのハイライト色 */
+    border: 2px solid yellow; /* 選択されたセルの枠線を黄色にする */
 }
