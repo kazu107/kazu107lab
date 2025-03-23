@@ -1,0 +1,146 @@
+/* Overall container layout */
+.flex {
+    display: flex;
+}
+.h-screen {
+    height: 100vh;
+}
+.relative {
+    position: relative;
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 16rem; /* 同等: w-64 */
+    background-color: #f3f4f6; /* gray-100 に相当 */
+    padding: 1rem;
+    border-right: 1px solid #d1d5db;
+}
+.sidebarTitle {
+    font-weight: bold;
+    font-size: 1.125rem; /* text-lg */
+    margin-bottom: 0.5rem;
+}
+.sidebarButton {
+    border: 1px solid #d1d5db;
+    border-radius: 0.75rem; /* rounded-xl */
+    padding: 0.25rem 0.75rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    cursor: pointer;
+}
+.sidebarGroups {
+    margin-top: 1rem; /* mt-4 */
+}
+.sidebarGroupItem {
+    cursor: pointer;
+    padding: 0.5rem; /* p-2 */
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem; /* rounded-lg */
+    margin-bottom: 0.5rem;
+}
+.sidebarGroupItemActive {
+    background-color: #e5e7eb; /* bg-gray-200 */
+}
+
+/* Main content styles */
+.mainContent {
+    flex: 1;
+    padding: 1rem;
+    overflow: auto;
+}
+.addSectionButton {
+    border: 1px solid #d1d5db;
+    border-radius: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+.sectionItem {
+    border: 1px solid #d1d5db;
+    border-radius: 1rem; /* 2xl */
+    padding: 1rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    transition: opacity 0.3s;
+}
+.sectionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+.sectionTitle {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+.sectionEditButton {
+    border: 1px solid #d1d5db;
+    border-radius: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    margin-left: 0.5rem;
+}
+
+/* Collapsible content animation container */
+.collapsibleContent {
+    overflow: hidden;
+    transition: height 0.3s ease, opacity 0.3s ease;
+}
+.textarea {
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    width: 100%;
+    height: 6rem;
+    padding: 0.5rem;
+}
+.colorInputContainer {
+    margin-top: 0.5rem;
+}
+.colorInputLabel {
+    margin-right: 0.5rem;
+}
+
+/* Modal overlay */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+.modalContent {
+    background: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    max-width: 40rem;
+    width: 100%;
+}
+.modalTitle {
+    font-size: 1.125rem;
+    font-weight: bold;
+}
+.modalTextarea {
+    border: 1px solid #d1d5db;
+    width: 100%;
+    height: 12rem;
+    padding: 0.5rem;
+}
+.modalButtonBar {
+    text-align: right;
+}
+.modalButton {
+    border: 1px solid #d1d5db;
+    border-radius: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    margin-left: 0.5rem;
+}

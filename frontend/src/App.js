@@ -9,6 +9,7 @@ import Login from "./components/sample/Login";
 import Signup from "./components/sample/Signup";
 import Probability from "./components/probability/probability";
 import Aster from "./components/aster/aster";
+import Speaker from "./components/speaker/speaker";
 import './App.css';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/probability" element={<Probability />} />
                     <Route path="/aster" element={<Aster />} />
+                    <Route path="/speaker" element={<Speaker />} />
                     {/* 他のルートを追加 */}
                 </Routes>
             </div>
