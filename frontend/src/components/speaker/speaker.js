@@ -282,6 +282,7 @@ export default function CollapsibleSite() {
         backgroundColor: "#f3f4f6",
         padding: "16px",
         borderRight: "1px solid #ccc",
+        height: "300vh"
     };
 
     const sidebarTitleStyle = {
@@ -306,6 +307,7 @@ export default function CollapsibleSite() {
         flex: 1,
         padding: "16px",
         overflow: "auto",
+        //paddingBottom: "1500px",
     };
 
     const groupItemStyle = {
