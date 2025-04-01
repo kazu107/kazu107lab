@@ -743,7 +743,7 @@ export default function CollapsibleSite() {
                                             </div>
                                         </>
                                     ) : (
-                                        <p>{content}</p>
+                                        <p style={{ whiteSpace: "pre-wrap" }}>{content}</p>
                                     )}
                                 </div>
                             </motion.div>
