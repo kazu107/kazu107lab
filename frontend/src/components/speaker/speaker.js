@@ -385,16 +385,21 @@ export default function CollapsibleSite() {
 
     const rootStyle = {
         position: "relative",
-        display: "flex",
+        display: "block",
         height: "100vh",
     };
 
+    // サイドバー
     const sidebarStyle = {
+        position: "fixed",
+        top: 0,
+        left: 0,
         width: "16rem",
+        height: "300vh",
         backgroundColor: "#f3f4f6",
         padding: "16px",
         borderRight: "1px solid #ccc",
-        height: "300vh", // サイドバーを画面3枚分の高さに設定
+        overflow: "auto",
     };
 
     const sidebarTitleStyle = {
@@ -416,9 +421,11 @@ export default function CollapsibleSite() {
     };
 
     const mainStyle = {
-        flex: 1,
+        marginLeft: "16rem",
         padding: "16px",
+        minHeight: "100vh",
         overflow: "auto",
+        paddingBottom: "100vh" // 要素+100vh分スクロール可能
     };
 
     const groupItemStyle = {
