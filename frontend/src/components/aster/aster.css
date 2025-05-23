@@ -10,9 +10,27 @@
 }
 
 .aster-controls {
-    flex: 2;
+    flex: 2; /* Takes up 2 parts of the flex container */
     margin-right: 10px;
+    padding: 10px; /* Add some padding around the controls themselves */
+    display: flex;
+    flex-direction: column; /* Stack control groups vertically */
+    overflow-y: auto; /* Allow scrolling if content overflows vertically */
+    max-height: calc(800px - 20px); /* Match container height minus padding */
+    background-color: #f4f4f8; /* Light background for the control panel */
+    border-radius: 5px;
 }
+
+.control-group { /* Already defined, ensure it works with flex parent */
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #fff;
+    /* Allow groups to shrink but not grow excessively */
+    flex-shrink: 0; 
+}
+
 
 .aster-controls label {
     display: block;
@@ -48,14 +66,249 @@
     padding: 0;
     margin: 0;
     border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    position: relative; /* For overlay text */
 }
 
 .aster-grid-button img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    position: absolute; /* Position image behind text overlays */
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
 
+.button-text-overlay, .cost-text-overlay {
+    position: relative;
+    z-index: 2; /* Ensure text is above the image */
+    padding: 1px 3px; /* Small padding for readability */
+    border-radius: 3px;
+    font-size: 10px; 
+}
+
+.button-text-overlay { /* For S and G */
+    color: white;
+    font-size: 14px; /* Larger for S/G */
+}
+
+.cost-text-overlay { /* For g, h, f costs */
+    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+    color: black;
+    font-size: 9px; /* Smaller for costs */
+}
+
+
 .aster-grid-button.selected {
-    border: 2px solid yellow; /* 選択されたセルの枠線を黄色にする */
+    border: 2px solid yellow; 
+    box-shadow: 0 0 5px rgba(255, 255, 0, 0.7); 
+}
+
+/* Styling for Start, Goal, and Path nodes */
+.aster-grid-button.start-point {
+    background-color: #28a745; /* Green */
+}
+.aster-grid-button.start-point .button-text-overlay { color: white; }
+
+
+.aster-grid-button.goal-point {
+    background-color: #dc3545; /* Red */
+}
+.aster-grid-button.goal-point .button-text-overlay { color: white; }
+
+
+.aster-grid-button.path-node {
+    background-color: rgba(255, 193, 7, 0.7); /* Yellow for path, slightly transparent */
+}
+/* No specific text color for path-node unless it also displays cost */
+
+
+/* Visualization step styles */
+.aster-grid-button.open-set-node {
+    background-color: rgba(173, 216, 230, 0.7); /* Light blue, slightly transparent */
+}
+
+.aster-grid-button.closed-set-node {
+    background-color: rgba(211, 211, 211, 0.7); /* Light gray, slightly transparent */
+}
+
+.aster-grid-button.current-node {
+    border: 2px solid #007bff; /* Blue border for current node */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.8);
+}
+
+
+/* Style for active mode button in controls */
+.aster-controls button.active-mode {
+    background-color: #007bff; 
+    color: white;
+    border-color: #0056b3; 
+}
+
+/* Ensure control buttons have a default style if not active-mode */
+.aster-controls button {
+    margin-right: 5px; 
+    margin-bottom: 5px; /* Add some bottom margin for wrapped buttons */
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.aster-controls div {
+    margin-bottom: 10px; 
+}
+
+.visualization-controls, .cost-controls {
+    padding: 10px;
+    border: 1px solid #eee;
+    margin-top: 10px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+.visualization-controls h4, .cost-controls h4, .grid-setup-group h4, .mode-selection-group h4, .pathfinding-actions-group h4, .help-toggle-group h4, .help-section h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* .control-group is already defined from previous turn */
+
+.control-group label { /* General label styling within groups */
+    display: block; /* Stack labels */
+    margin-bottom: 8px;
+    font-size: 0.9em; /* Slightly smaller font for labels */
+}
+.control-group input[type="number"] {
+    width: 70px; /* Slightly wider for better usability */
+    margin-left: 5px;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.cost-controls label { /* Specifically for radio buttons to be inline */
+    margin-right: 10px;
+    font-weight: normal;
+    display: inline-flex; /* Align radio button and text */
+    align-items: center;
+}
+.cost-controls input[type="radio"] {
+    margin-right: 4px;
+}
+
+
+.aster-controls button {
+    margin-right: 8px; /* Increased spacing */
+    margin-bottom: 8px; /* Increased spacing */
+    padding: 8px 12px; 
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    color: #333; /* Darker text for better contrast */
+    cursor: pointer;
+    border-radius: 4px; 
+    transition: background-color 0.2s ease, box-shadow 0.2s ease; /* Added box-shadow transition */
+    font-size: 0.9em;
+}
+
+.aster-controls button:hover {
+    background-color: #e0e0e0; /* Slightly darker hover */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.aster-controls button.active-mode {
+    background-color: #007bff; 
+    color: white;
+    border-color: #0056b3; 
+}
+.aster-controls button.active-mode:hover {
+    background-color: #0056b3;
+}
+
+
+.aster-controls button:disabled {
+    background-color: #e9ecef; /* Lighter background for disabled */
+    color: #6c757d; /* Muted text color */
+    cursor: not-allowed;
+    border-color: #ced4da;
+    box-shadow: none;
+}
+
+.user-message {
+    margin-top: 10px;
+    padding: 10px; /* More padding */
+    border-radius: 4px;
+    background-color: #e9ecef; /* Neutral background */
+    border: 1px solid #ced4da;
+    font-weight: 500; /* Normal bold */
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.help-button { /* Specific style for the help toggle button */
+    width: 100%;
+    background-color: #6c757d;
+    color: white;
+    margin-bottom: 10px; /* Space it out */
+}
+.help-button:hover {
+    background-color: #5a6268;
+}
+
+
+/* Styles for help section from previous turn, just ensure they are compatible */
+.help-section {
+    margin-top: 0; /* help-toggle-group already has margin-bottom */
+    padding: 15px; /* More padding for help section */
+    border: 1px solid #ced4da;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    font-size: 0.85em; /* Smaller font for help text */
+}
+.help-section h4 {
+    margin-top: 0;
+    color: #007bff; /* Blue heading for help sections */
+    font-size: 1.1em;
+}
+.help-section ul, .help-section ol {
+    padding-left: 20px;
+}
+.help-section li {
+    margin-bottom: 6px; /* More space between list items */
+}
+.help-section p {
+    margin-bottom: 8px;
+}
+.legend-color-start, .legend-color-goal, .legend-color-path, .legend-color-open, .legend-color-closed, .legend-color-current {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+    border: 1px solid #6c757d; /* Darker border for legend colors */
+    vertical-align: middle;
+}
+.legend-color-start { background-color: #28a745; }
+.legend-color-goal { background-color: #dc3545; }
+.legend-color-path { background-color: rgba(255, 193, 7, 0.7); }
+.legend-color-open { background-color: rgba(173, 216, 230, 0.7); }
+.legend-color-closed { background-color: rgba(211, 211, 211, 0.7); }
+.legend-color-current { border: 2px solid #007bff; box-sizing: border-box; } /* Ensure border doesn't increase size */
+
+.aster-cell-editor h5 {
+    margin-top: 10px; /* More space above cell editor title */
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+
+/* Ensure control groups provide some internal structure for their children if needed */
+.grid-setup-group label, .mode-selection-group p, .pathfinding-actions-group p, .visualization-controls p, .cost-controls label {
+    margin-bottom: 8px; /* Consistent bottom margin for elements within groups */
+}
+.mode-selection-group button, .pathfinding-actions-group button, .visualization-controls button {
+    margin-top: 5px; /* Add some top margin to buttons if they follow text */
 }
