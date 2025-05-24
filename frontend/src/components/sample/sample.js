@@ -77,6 +77,14 @@ const Sidebar = ({ selectedSection, onSelect }) => {
                             <li className={selectedSection === 'aster' ? 'active-unique123' : ''}>
                                 <a href="#aster" onClick={() => onSelect('aster')}>aster visualizer</a>
                             </li>
+                            {/* ... existing lab items ... */}
+                            <li className={selectedSection === 'rpn-calculator' ? 'active-unique123' : ''}>
+                                {/* This link goes to a new page, so direct href is best.
+                                    The active class might not work as expected without further state changes
+                                    if 'rpn-calculator' is not a 'selectedSection' this component manages.
+                                    For now, a direct link is the primary goal. */}
+                                <a href="/rpn-calculator">RPN Calculator</a>
+                            </li>
                         </ul>
                     )}
                 </li>

@@ -1,0 +1,64 @@
+/* Basic styling for RPN Calculator */
+.rpn-calculator {
+    padding: 20px;
+    font-family: sans-serif;
+}
+
+.input-section {
+    margin-bottom: 20px;
+}
+
+.input-section input[type="text"] {
+    padding: 10px;
+    margin-right: 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.input-section button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.input-section button:hover {
+    background-color: #0056b3;
+}
+
+.output-section {
+    display: flex;
+    gap: 20px;
+}
+
+.rpn-output, .tree-visualization {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    overflow: auto; /* Add scrollbars if SVG content is larger than the container */
+    min-height: 200px; /* Suggest a minimum height */
+}
+
+.rpn-output pre {
+    white-space: pre-wrap; /* Allow wrapping for long RPN strings */
+    word-wrap: break-word;
+}
+
+.error-message {
+    color: red;
+    background-color: #ffebeb; /* Light red background */
+    border: 1px solid #ffcdd2; /* Softer red border */
+    padding: 10px;
+    margin-bottom: 15px; /* Space below the error message */
+    border-radius: 4px;
+}
+
+.tree-visualization svg {
+    display: block; /* Removes extra space below SVG if it's an inline element */
+    margin: 0 auto; /* Optional: centers the SVG if it's narrower than the container */
+}
