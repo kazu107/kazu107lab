@@ -62,29 +62,19 @@ const Sidebar = ({ selectedSection, onSelect }) => {
                     </button>
                     {isDashboardOpen && (
                         <ul>
-                            <li className={selectedSection === 'microwave' ? 'active-unique123' : ''}>
-                                <a href="#microwave" onClick={() => onSelect('microwave')}>microwave simulator</a>
+                            {/* This should now set a general 'Lab' section for the main page */}
+                            <li className={selectedSection === 'Lab' ? 'active-unique123' : ''}>
+                                <a href="#lab" onClick={() => onSelect('Lab')}>Lab Dashboard</a>
                             </li>
-                            <li className={selectedSection === 'roulette' ? 'active-unique123' : ''}>
-                                <a href="#roulette" onClick={() => onSelect('roulette')}>accurate roulette</a>
-                            </li>
-                            <li className={selectedSection === 'markov' ? 'active-unique123' : ''}>
-                                <a href="#markov" onClick={() => onSelect('markov')}>markov chain</a>
-                            </li>
-                            <li className={selectedSection === 'gacha' ? 'active-unique123' : ''}>
-                                <a href="#gacha" onClick={() => onSelect('gacha')}>gacha simulator</a>
-                            </li>
-                            <li className={selectedSection === 'aster' ? 'active-unique123' : ''}>
-                                <a href="#aster" onClick={() => onSelect('aster')}>aster visualizer</a>
-                            </li>
-                            {/* ... existing lab items ... */}
-                            <li className={selectedSection === 'rpn-calculator' ? 'active-unique123' : ''}>
-                                {/* This link goes to a new page, so direct href is best.
-                                    The active class might not work as expected without further state changes
-                                    if 'rpn-calculator' is not a 'selectedSection' this component manages.
-                                    For now, a direct link is the primary goal. */}
-                                <a href="/rpn-calculator">RPN Calculator</a>
-                            </li>
+                            {/* Individual tool links in sidebar still go directly to their pages */}
+                            <li><a href="/microwave">Microwave Simulator</a></li>
+                            <li><a href="/roulette">Accurate Roulette</a></li>
+                            <li><a href="/markov">Markov Chain</a></li>
+                            <li><a href="/probability">Gacha Simulator</a></li>
+                            <li><a href="/aster">Aster Visualizer</a></li>
+                            <li><a href="/rpn-calculator">RPN Calculator</a></li>
+                            <li><a href="/speaker">Speaker Tool</a></li>
+                            <li><a href="/test">Test Page</a></li>
                         </ul>
                     )}
                 </li>
@@ -175,109 +165,61 @@ const ProfileContent = ({ isLoggedIn, user }) => {
     }
 };
 
-// MicrowaveContent component
-const MicrowaveContent = () => {
+const LabContent = () => {
     return (
         <div>
-            <h2>
-                Microwave Simulator{' '}
-                <a
-                    href="/microwave"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="external-link-home"
-                >
-                    <FaExternalLinkAlt />
-                </a>
-            </h2>
-            <p>Coming soon...</p>
+            <h2>Lab Dashboard</h2>
+            <p>Welcome to the kazu107 Lab. Explore various tools and simulations:</p>
+            <ul className="lab-tool-list">
+                <li>
+                    <strong>Microwave Simulator:</strong> Simulates microwave behavior.
+                    <a href="/microwave" className="external-link-lab" title="Open Microwave Simulator" target="_blank" rel="noopener noreferrer"><FaExternalLinkAlt /></a>
+                    <a href="/microwave" className="goto-tool-link"> Go to tool</a>
+                </li>
+                <li>
+                    <strong>Accurate Roulette:</strong> Experience an accurate roulette simulation.
+                    <a href="/roulette" className="external-link-lab" title="Open Accurate Roulette" target="_blank" rel="noopener noreferrer"><FaExternalLinkAlt /></a>
+                    <a href="/roulette" className="goto-tool-link"> Go to tool</a>
+                </li>
+                <li>
+                    <strong>Markov Chain:</strong> Explore Markov chains.
+                    <a href="/markov" className="external-link-lab" title="Open Markov Chain tool" target="_blank" rel="noopener noreferrer"><FaExternalLinkAlt /></a>
+                    <a href="/markov" className="goto-tool-link"> Go to tool</a>
+                </li>
+                <li>
+                    <strong>Gacha Simulator:</strong> Simulate gacha mechanics.
+                    <a href="/probability" className="external-link-lab" title="Open Gacha Simulator" target="_blank" rel="noopener noreferrer"><FaExternalLinkAlt /></a>
+                    <a href="/probability" className="goto-tool-link"> Go to tool</a>
+                </li>
+                <li>
+                    <strong>Aster Visualizer:</strong> Visualize asterisk patterns.
+                    <a href="/aster" className="external-link-lab" title="Open Aster Visualizer" target="_blank" rel="noopener noreferrer"><FaExternalLinkAlt /></a>
+                    <a href="/aster" className="goto-tool-link"> Go to tool</a>
+                </li>
+                <li>
+                    <strong>RPN Calculator:</strong> Convert expressions to RPN and view trees.
+                    <a href="/rpn-calculator" className="external-link-lab" title="Open RPN Calculator" target="_blank" rel="noopener noreferrer"><FaExternalLinkAlt /></a>
+                    <a href="/rpn-calculator" className="goto-tool-link"> Go to tool</a>
+                </li>
+                <li>
+                    <strong>Speaker Tool:</strong> Speaker-related functions.
+                    <a href="/speaker" className="external-link-lab" title="Open Speaker Tool" target="_blank" rel="noopener noreferrer"><FaExternalLinkAlt /></a>
+                    <a href="/speaker" className="goto-tool-link"> Go to tool</a>
+                </li>
+                <li>
+                    <strong>Test Page:</strong> A page for testing.
+                    <a href="/test" className="external-link-lab" title="Open Test Page" target="_blank" rel="noopener noreferrer"><FaExternalLinkAlt /></a>
+                    <a href="/test" className="goto-tool-link"> Go to tool</a>
+                </li>
+            </ul>
         </div>
     );
 };
 
-// RouletteContent component
-const RouletteContent = () => {
-    return (
-        <div>
-            <h2>
-                Accurate Roulette{' '}
-                <a
-                    href="/roulette"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="external-link-home"
-                >
-                    <FaExternalLinkAlt />
-                </a>
-            </h2>
-            <p>Coming soon...</p>
-        </div>
-    );
-};
-
-// MarkovContent component
-const MarkovContent = () => {
-    return (
-        <div>
-            <h2>
-                Markov Chain{' '}
-                <a
-                    href="/markov"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="external-link-home"
-                >
-                    <FaExternalLinkAlt />
-                </a>
-            </h2>
-            <p>Coming soon...</p>
-        </div>
-    );
-};
-
-// GachaContent component
-const GachaContent = () => {
-    return (
-        <div>
-            <h2>
-                Gacha Simulator{' '}
-                <a
-                    href="/probability"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="external-link-home"
-                >
-                    <FaExternalLinkAlt />
-                </a>
-            </h2>
-            <p>Coming soon...</p>
-        </div>
-    );
-};
-
-// AsterContent component
-const AsterContent = () => {
-    return (
-        <div>
-            <h2>
-                Aster Visualizer{' '}
-                <a
-                    href="/aster"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="external-link-home"
-                >
-                    <FaExternalLinkAlt />
-                </a>
-            </h2>
-            <p>Coming soon...</p>
-        </div>
-    );
-}
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [selectedSection, setSelectedSection] = useState('Home');
+    const [selectedSection, setSelectedSection] = useState('Profile'); // Default to Profile
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -307,11 +249,8 @@ function App() {
                         {selectedSection === 'Profile' && <ProfileContent isLoggedIn={isLoggedIn} user={user} />}
                         {selectedSection === 'Settings' && <h2>Settings</h2>}
                         {selectedSection === 'Security' && <h2>Security Settings</h2>}
-                        {selectedSection === 'microwave' && <MicrowaveContent />}
-                        {selectedSection === 'roulette' && <RouletteContent />}
-                        {selectedSection === 'markov' && <MarkovContent />}
-                        {selectedSection === 'gacha' && <GachaContent />}
-                        {selectedSection === 'aster' && <AsterContent />}
+                        {selectedSection === 'Lab' && <LabContent />} {/*  <-- Render LabContent */}
+                        {/* Remove other individual content like MicrowaveContent, RouletteContent etc. from here */}
                         {selectedSection === 'Help' && <h2>Help</h2>}
                         {selectedSection === 'Logout' && <h2>Logout</h2>}
                     </div>
